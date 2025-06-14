@@ -91,6 +91,41 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	/*
+	구현 해야할것
+	링크드 리스트에 올바른 위치에 노드를 삽입하는 것
+	
+	고려사항
+	링크드 리스트가 존재할때와 안할때
+	완전히 수행되지 않았다면 -1을 출력(이미 있는 값)
+	올바른 위치에 삽입이 됐다면 정렬된 리스트를 출력한다
+	*/
+
+	if (ll == NULL){
+		return -1;
+	}
+
+	ListNode *cur = ll->head;
+	int idx = 0;
+
+	while (cur != NULL){
+		if(cur->item == item){
+			return -1;
+		}
+		if(cur->item > item){
+			// 삽입할 idx만 가져오도록
+			break;
+		}
+		cur = cur->next;
+		idx++;
+	}
+	// 아무거도 없을땐 삽입이 안됨 + 실패했을 때도 고려
+	if (insertNode(ll, idx, item) == 0) {
+        return idx;
+    }
+
+	return -1;
+	
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

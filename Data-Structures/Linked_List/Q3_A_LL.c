@@ -87,6 +87,38 @@ int main()
 void moveOddItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+	/*
+	현재 노드가 홀수라면 연결 제거 후 뒤로 보냄
+	*/
+
+	ListNode *prev = NULL;
+	ListNode *cur = ll->head;
+	ListNode *tail = findNode(ll, ll->size - 1);
+	int size= ll->size;
+	
+	//  원래 길이만큼 탐색시 모든 노드를 만나것, 이후 노드들은 홀수여서 뒤로 추가된 것
+	for(int i =0; i<size; i++){
+		if (cur->item % 2 != 0){
+			if(prev == NULL){
+				ll->head = cur->next;
+				tail->next = cur;
+				cur->next = NULL;
+				tail = cur;
+				cur = ll->head;
+			} else {
+				prev->next = cur->next;
+				tail->next = cur;
+				cur->next = NULL;
+				tail = cur;
+				cur = prev->next;
+			}
+		// 짝수 일때
+		} else {
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

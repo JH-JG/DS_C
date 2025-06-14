@@ -104,6 +104,24 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	int insert_idx = 1;
+	int max_len = (int)(ll1->size) * 2;
+
+    while (ll2->head != NULL) {
+        // ll2의 헤드 추출
+        int item = ll2->head->item;
+
+		// ll2가 남았더라도 ll1의 노드 사이사이 삽입할 수 없다면 종료
+		if (insert_idx < max_len){
+			insertNode(ll1, insert_idx, item);
+        	insert_idx += 2;
+			// 삽입되었다면 ll2의 헤드 제거
+        	removeNode(ll2, 0);
+		} else {
+			break;
+		}
+    }
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
