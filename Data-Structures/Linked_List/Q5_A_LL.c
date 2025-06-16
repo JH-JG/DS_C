@@ -39,6 +39,7 @@ int removeNode(LinkedList *ll, int index);
 int main()
 {
 	int c, i;
+	c = 1;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -103,6 +104,35 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+	/*
+	절반(홀수라면 +1)을 앞 나머지 절반은 뒤 리스트로 나누기
+
+	데이터만 가져와서 추가하는 방식으로 수정하기
+	위 코드대로면 free를 두 번 하게 됨
+	*/
+
+	ListNode *temp = ll->head;
+	int half = (ll->size + 1) / 2; // 홀수일때 하나 더 많도록
+
+
+	// resultFrontList->head = ll->head;
+	// resultFrontList->size = half;
+
+	// resultBackList->head = findNode(ll, half);
+	// resultBackList->size = ll->size - half;
+
+	// temp = findNode(ll, half-1);
+	// temp->next = NULL;
+	
+	for(int i = 0; i < half; i++){
+		insertNode(resultFrontList, i, temp->item);
+		temp = temp->next;
+	}
+	for(int i = 0; i < ll->size - half; i++){
+		insertNode(resultBackList, i, temp->item);
+		temp = temp->next;
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

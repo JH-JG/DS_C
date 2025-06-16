@@ -88,6 +88,31 @@ int main()
 void RecursiveReverse(ListNode **ptrHead)
 {
 	/* add your code here */
+	/*
+	마지막 노드까지 연속적으로 호출, 다음 호출이 null이면 현재를 head로
+	다시 돌아가면서 역순으로 연결한다.
+	*/
+	ListNode *first = *ptrHead;
+	ListNode *rest = first->next;
+
+	if(first == NULL || rest == NULL){return;}
+
+	/*
+	재귀 호출이 종료되었다면
+	rest는 마지막 노드
+	first는 그 직전 노드를 가르키고 있다
+	1 2 3 4 5가 리스트로 주어졌을 때
+	rest = 5, first = 4인 상태
+	마지막에 first->next->next = NULL인 상태
+	이걸 NULL이 아닌 first로 가르키면서 이중으로 연결하고
+	first->rest 연결을 끊고 rest->first 연결만 유지
+	이렇게 역순 연결로 변환한다.
+	*/
+	RecursiveReverse(&rest);
+	first->next->next = first;
+	first->next = NULL;
+	*ptrHead = rest;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

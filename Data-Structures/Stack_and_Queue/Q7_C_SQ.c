@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MIN_INT -1000
 
@@ -105,6 +106,30 @@ int main()
 int balanced(char *expression)
 {
 /* add your code here */
+	Stack temp;
+	temp.ll.head = NULL;
+	temp.ll.size = 0;
+
+	int str_len = strlen(expression);
+	int c; // 스택에 저장되는 타입 int
+
+	for(int i = 0; i < str_len; i++){
+		c = expression[i];
+		if (c == '[' || c == '{' || c == '('){
+			push(&temp, c);
+		} else {
+			if(isEmptyStack(&temp)) return 1; // 괄호를 닫았는데 스택이 비었다면 1반환
+
+			if ((peek(&temp) == '(' && c == ')') || 
+                (peek(&temp) == '{' && c == '}') || 
+                (peek(&temp) == '[' && c == ']')){
+                pop(&temp);
+			} else {
+				return 1;
+			}
+		}
+	}
+	return !isEmptyStack(&temp);
 }
 
 ////////////////////////////////////////////////////////////
