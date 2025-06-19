@@ -95,6 +95,31 @@ void levelOrderTraversal(BSTNode* root)
 {
 
     /* add your code here */
+	if (root == NULL) return;
+
+    // Queue 변수를 직접 선언 (포인터가 아님)
+    QueueNode *head = NULL;
+    QueueNode *tail = NULL;
+
+    // 루트 노드를 큐에 추가
+    enqueue(&head, &tail, root);
+
+    // 큐가 비어있지 않은 동안 반복
+    while (!isEmpty(head)) {
+        // 큐에서 노드를 꺼내서 출력
+        BSTNode *cur = dequeue(&head, &tail);
+        printf("%d ", cur->item);
+
+        // 왼쪽 자식이 있으면 큐에 추가
+        if (cur->left != NULL) {
+            enqueue(&head, &tail, cur->left);
+        }
+
+        // 오른쪽 자식이 있으면 큐에 추가
+        if (cur->right != NULL) {
+            enqueue(&head, &tail, cur->right);
+        }
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

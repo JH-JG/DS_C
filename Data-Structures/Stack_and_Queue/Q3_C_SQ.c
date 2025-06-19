@@ -63,7 +63,7 @@ int main()
     printf("2: Check the stack is pairwise consecutive:\n");
     printf("0: Quit:\n");
 
-    while (c != 0)
+    while (c != 0);
 	{
 		printf("Please input your choice(1/2/0): ");
 		scanf("%d", &c);
@@ -107,18 +107,16 @@ int isStackPairwiseConsecutive(Stack *s)
 	int prev = NULL;
 	int item = NULL;
 
+	if (s == NULL) return 0;
+
 	if (s->ll.size % 2 != 0) return 0;
 
 	while(!isEmptyStack(s)){
-		if (prev == NULL){
-			prev = pop(s);
-		} else {
-			item = pop(s);
-			if(abs(prev - item) != 1){
-				return 0;
-			}
-			prev = NULL;
-			item = NULL;
+		prev = pop(s);
+		item = pop(s);
+
+		if(abs(prev - item) != 1){
+			return 0;
 		}
 	}
 

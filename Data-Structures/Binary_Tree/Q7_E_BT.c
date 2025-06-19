@@ -103,6 +103,21 @@ int main()
 int smallestValue(BTNode *node)
 {
 	/* add your code here */
+    if (node == NULL) return -1;
+
+    int min_num = node->item; // 현재 노드를 가장 작은 값으로
+
+    int left = smallestValue(node->left);
+    int right = smallestValue(node->right);
+
+    if (left != -1){
+        min_num = min_num < left ? min_num : left;
+    }
+    if (right != -1){
+        min_num = min_num < right ? min_num : right;
+    }
+
+    return min_num;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

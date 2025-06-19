@@ -102,7 +102,23 @@ int main()
 
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+    // 증손자 찾기 3단계 아래 노드가 있는지 확인
+    // 종료 조건
+    if (node == NULL) return 0;
+
+    // 왼쪽, 오른쪽의 최대 깊이를 재귀적으로 탐색
+    int left = hasGreatGrandchild(node->left);
+    int right = hasGreatGrandchild(node->right);
+
+    // 현재 노드에서 가장 깊은 리프까지의 깊이
+    int depth = (left > right ? left : right) + 1;
+    
+    // 증손자를 가진 노드: 최대 깊이가 4 이상인 노드, 리프의 깊이가 1부터 시작
+    if (depth > 3){
+        printf("%d \n", node->item);
+    }
+
+    return depth;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
